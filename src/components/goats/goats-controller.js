@@ -1,6 +1,6 @@
 angular.module('Goats')
 .controller('GoatsController', ['$scope', '$http', function($scope, $http) {
-    $scope.goat = {};
+    $scope.goat = null;
 
     $scope.editingGoat = false;
 
@@ -28,10 +28,6 @@ angular.module('Goats')
     $scope.cancelGoat = function() {
         $scope.editingGoat = false;
     };
-
-    $scope.$watch('goatQuery', function() {
-        console.log($scope.goatQuery);
-    })
 
     $scope.searchGoats = _.debounce(function(query) {
         $http.get('/goats/search/' + query)
