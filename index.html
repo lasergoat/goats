@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Goat Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="App" class="layer">
+    <main class="row-12" ng-controller="GoatsController">
+        <section class="layer" ng-if="!editingGoat">
+            <div class="row-2 bg-light text-center">
+                <hgroup class="position-center-middle">
+                    <h1>The Goat Database</h1>
+                    <br>
+                    <div><input type="text" placeholder="Search Goats" class="text-center" ng-model="goatQuery" ng-change="searchGoats(goatQuery)"></div>
+                </hgroup>
+            </div>
+            <ul class="container row-10 borders-bottom scroll-y">
+                <li ng-repeat="goat in goats track by goat.name" class="row pad-small gutter">
+                    <div class="col-2">
+                        <img ng-if="goat.image.length > 5" ng-src="{{goat.image}}" width="100%">
+                        &nbsp;
+                    </div>
+                    <hgroup class="col-8">
+                        <h3>{{goat.name}}</h3>
+                        <div class="small"><strong>AKA: </strong>{{goat.alt}}</div>
+                        <div class="small"><strong>Origin: </strong><span>{{goat.origin}}</span></div>
+                        <div class="small"><strong>Purpose: </strong><span>{{goat.purpose}}</span></div>
+                    </hgroup>
+                    <div class="col-2">
+                        <a ng-click="editGoat(goat)" class="button light">Edit</a>
+                    </div>
+                </li>
+            </ul>            
+        </section>
+        <section class="layer" ng-if="editingGoat">
+            <div class="row-2 bg-light text-center text-middle">
+                <h1>Editing the <strong>{{goat.name}}</strong></h1>
+            </div>
+            <div class="row-10 pad-large gutter">
+                <div class="col-3">
+                    <img ng-if="goat.image.length > 5" ng-src="{{goat.image}}" width="100%">
+                </div>
+                <div class="col-9">
+                    <div class="field"><label>Alternate Name:</label><input type="text" ng-model="goat.alt"></div>
+                    <div class="field"><label>Origin:</label><input type="text" ng-model="goat.origin"></div>
+                    <div class="field"><label>Purpose:</label><input type="text" ng-model="goat.purpose"></div>
+                    <div class="field buttons-right">
+                        <button ng-click="saveGoat()" class="primary">Save</button>
+                        <button ng-click="cancelGoat()" class="light">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="src/assets/lodash.min.js"></script>
+<script src="src/assets/angular.min.js"></script>
+<script src="src/assets/angular-animate.min.js"></script>
+<script src="src/assets/angular-mocks.js"></script>
+<script src="src/assets/angular-ui-router.min.js"></script>
+<script src="src/components/goats/goats.js"></script>
+<script src="src/components/goats/goats-controller.js"></script>
+<script src="src/app.js"></script>
+</html>

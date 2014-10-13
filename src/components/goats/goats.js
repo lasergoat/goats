@@ -1,0 +1,1 @@
+angular.module('Goats', ['ngAnimate', 'ui.router', 'ngMockE2E']);
