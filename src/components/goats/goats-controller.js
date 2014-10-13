@@ -1,43 +1,45 @@
 angular.module('Goats')
-.controller('GoatsController', ['$scope', '$http', function($scope, $http) {
-    $scope.goat = null;
+.controller('GoatsController', ['GoatsService', function(GoatsService) {
+    var self = this;
 
-    $scope.editingGoat = false;
+    self.goat = null;
 
-    $scope.goatQuery = null;
+    self.editingGoat = false;
 
-    $scope.goats = [];
+    self.goatQuery = null;
 
-    $scope.editGoat = function(goat) {
-        $scope.goat = goat;
-        $scope.editingGoat = true;
+    self.goats = [];
+
+    self.editGoat = function(goat) {
+        self.goat = goat;
+        self.editingGoat = true;
     };
 
-    $scope.saveGoat = function() {
-        $http.post('/goats', $scope.goat)
+    self.saveGoat = function() {
+        GoatsService.saveGoat(self.goat)
             .then(function() {
-                $http.get('/goats')
+                GoatsService.getGoats()
                     .then(function(response) {
-                        $scope.goat = null;
-                        $scope.goats = response.data;
-                        $scope.editingGoat = false;
+                        self.goat = null;
+                        self.goats = response.data;
+                        self.editingGoat = false;
                     });
             });
     };
 
-    $scope.cancelGoat = function() {
-        $scope.editingGoat = false;
+    self.cancelGoat = function() {
+        self.editingGoat = false;
     };
 
-    $scope.searchGoats = _.debounce(function(query) {
-        $http.get('/goats/search/' + query)
+    self.searchGoats = _.debounce(function(query) {
+        GoatsService.searchGoats(query)
             .then(function(response) {
-                $scope.goats = response.data;
+                self.goats = response.data;
             });
     }, 300);
 
-    $http.get('/goats')
+    GoatsService.getGoats()
         .then(function(response) {
-            $scope.goats = response.data;
+            self.goats = response.data;
         });
 }]);
