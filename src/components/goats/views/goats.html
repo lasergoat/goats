@@ -1,0 +1,29 @@
+<section class="layer">
+    <div class="row-2 bg-light text-center">
+        <hgroup class="position-center-middle">
+            <h1>The Goat Database</h1>
+            <br>
+            <div><input type="text" placeholder="Search Goats" class="text-center" ng-model="goats.goatQuery" ng-change="goats.searchGoats(goats.goatQuery)"></div>
+        </hgroup>
+    </div>
+    <ul class="container row-10 borders-bottom scroll-y">
+        <li ng-if="!goats.goats.length && goats.goatQuery.length" class="text-center pad">
+            <h2 class="color-failure">What the heck kind of goat is a <strong>{{goats.goatQuery}}</strong>??</h2>
+        </li>
+        <li ng-repeat="goat in goats.goats track by goat.name" class="row pad-small gutter">
+            <div class="col-2">
+                <img ng-if="goat.image.length > 5" ng-src="{{goat.image}}" width="100%">
+                &nbsp;
+            </div>
+            <hgroup class="col-8">
+                <h3>{{goat.name}}</h3>
+                <div class="small"><strong>AKA: </strong>{{goat.alt}}</div>
+                <div class="small"><strong>Origin: </strong><span>{{goat.origin}}</span></div>
+                <div class="small"><strong>Purpose: </strong><span>{{goat.purpose}}</span></div>
+            </hgroup>
+            <div class="col-2">
+                <a ui-sref="goat({name: goat.name})" class="button light">Edit</a>
+            </div>
+        </li>
+    </ul>            
+</section>

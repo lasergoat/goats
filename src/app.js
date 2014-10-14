@@ -343,7 +343,7 @@ angular.module('App', ['Goats', 'ngMockE2E'])
             },
             {
                 name: 'Finnish Landrace',
-                image: '//upload.wikimedia.org/wikipedia/commons/thumb/3/30/Finnish_Landrace_goat_in_winter.jpg/85px-Finnish_Landrace_goat_in_winter.jpg" width="85" height="117" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/30/Finnish_Landrace_goat_in_winter.jpg/128px-Finnish_Landrace_goat_in_winter.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/30/Finnish_Landrace_goat_in_winter.jpg/170px-Finnish_Landrace_goat_in_winter.jpg 2x" data-file-width="745" data-file-height="1024',
+                image: '//upload.wikimedia.org/wikipedia/commons/thumb/3/30/Finnish_Landrace_goat_in_winter.jpg/85px-Finnish_Landrace_goat_in_winter.jpg',
                 alt: '---',
                 origin: 'Finland',
                 purpose: 'Milk'
@@ -572,7 +572,7 @@ angular.module('App', ['Goats', 'ngMockE2E'])
             },
             {
                 name: 'Messinese',
-                image: '//upload.wikimedia.org/wikipedia/commons/thumb/2/2d/MessineseGoatBuck.JPG/85px-MessineseGoatBuck.JPG" width="85" height="103" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2d/MessineseGoatBuck.JPG/128px-MessineseGoatBuck.JPG 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/2d/MessineseGoatBuck.JPG/170px-MessineseGoatBuck.JPG 2x" data-file-width="947" data-file-height="1142',
+                image: '//upload.wikimedia.org/wikipedia/commons/thumb/2/2d/MessineseGoatBuck.JPG/85px-MessineseGoatBuck.JPG',
                 alt: 'Nebrodi',
                 origin: 'Province of Messina',
                 purpose: 'Milk'
@@ -663,7 +663,7 @@ angular.module('App', ['Goats', 'ngMockE2E'])
             },
             {
                 name: 'Poitou',
-                image: '//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Poitou.jpg/85px-Poitou.jpg" width="85" height="64" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Poitou.jpg/128px-Poitou.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Poitou.jpg/170px-Poitou.jpg 2x" data-file-width="2592" data-file-height="1944',
+                image: '//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Poitou.jpg/85px-Poitou.jpg',
                 alt: '---',
                 origin: 'Western France',
                 purpose: 'Milk'
@@ -897,7 +897,15 @@ angular.module('App', ['Goats', 'ngMockE2E'])
             }
         ];
 
+        $httpBackend.whenGET(/views.*/).passThrough();
+
         $httpBackend.whenGET('/goats').respond(goats);
+
+        $httpBackend.whenGET(/goat\/.*/).respond(function(method, url, data) {
+            var name = url.split('/')[2];
+
+            return [200, _.find(goats, {name: name})];
+        });
 
         $httpBackend.whenGET(/\/goats\/search\/.*/)
             .respond(function(method, url, data) {

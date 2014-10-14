@@ -1,0 +1,19 @@
+<section class="layer">
+    <div class="row-2 bg-light text-center text-middle">
+        <h1>Editing the <strong>{{goats.goat.name}}</strong></h1>
+    </div>
+    <div class="container row-10 pad-large gutter">
+        <div class="col-3">
+            <img ng-if="goats.goat.image.length > 5" ng-src="{{goats.goat.image}}" width="100%">
+        </div>
+        <div class="col-9">
+            <div class="field"><label>Alternate Name:</label><input type="text" ng-model="goats.goat.alt"></div>
+            <div class="field"><label>Origin:</label><input type="text" ng-model="goats.goat.origin"></div>
+            <div class="field"><label>Purpose:</label><input type="text" ng-model="goats.goat.purpose"></div>
+            <div class="field buttons-right">
+                <button ng-click="goats.saveGoat()" class="primary">Save</button>
+                <button ui-sref="goats" class="light">Cancel</button>
+            </div>
+        </div>
+    </div>
+</section>

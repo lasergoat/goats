@@ -1,45 +1,23 @@
 angular.module('Goats')
-.controller('GoatsController', ['GoatsService', function(GoatsService) {
+.controller('GoatsController', ['$state', 'GoatsService', 'goats', 'goat', function($state, GoatsService, goats, goat) {
     var self = this;
 
-    self.goat = null;
+    self.goat = goat.data;
 
-    self.editingGoat = false;
+    self.goatQuery = $state.params.query;
 
-    self.goatQuery = null;
-
-    self.goats = [];
-
-    self.editGoat = function(goat) {
-        self.goat = goat;
-        self.editingGoat = true;
-    };
+    self.goats = goats.data;
 
     self.saveGoat = function() {
         GoatsService.saveGoat(self.goat)
             .then(function() {
-                GoatsService.getGoats()
-                    .then(function(response) {
-                        self.goat = null;
-                        self.goats = response.data;
-                        self.editingGoat = false;
-                    });
-            });
-    };
-
-    self.cancelGoat = function() {
-        self.editingGoat = false;
+                $state.go('goats');
+            })
     };
 
     self.searchGoats = _.debounce(function(query) {
-        GoatsService.searchGoats(query)
-            .then(function(response) {
-                self.goats = response.data;
-            });
-    }, 300);
+        if (!query.length) return $state.go('goats');
 
-    GoatsService.getGoats()
-        .then(function(response) {
-            self.goats = response.data;
-        });
+        $state.go('search', {query: query});
+    }, 300);
 }]);

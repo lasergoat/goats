@@ -6,52 +6,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body ng-app="App" class="layer">
-    <main class="row-12" ng-controller="GoatsController as goats">
-        <section class="layer" ng-if="!goats.editingGoat">
-            <div class="row-2 bg-light text-center">
-                <hgroup class="position-center-middle">
-                    <h1>The Goat Database</h1>
-                    <br>
-                    <div><input type="text" placeholder="Search Goats" class="text-center" ng-model="goats.goatQuery" ng-change="goats.searchGoats(goats.goatQuery)"></div>
-                </hgroup>
-            </div>
-            <ul class="container row-10 borders-bottom scroll-y">
-                <li ng-repeat="goat in goats.goats track by goat.name" class="row pad-small gutter">
-                    <div class="col-2">
-                        <img ng-if="goat.image.length > 5" ng-src="{{goat.image}}" width="100%">
-                        &nbsp;
-                    </div>
-                    <hgroup class="col-8">
-                        <h3>{{goat.name}}</h3>
-                        <div class="small"><strong>AKA: </strong>{{goat.alt}}</div>
-                        <div class="small"><strong>Origin: </strong><span>{{goat.origin}}</span></div>
-                        <div class="small"><strong>Purpose: </strong><span>{{goat.purpose}}</span></div>
-                    </hgroup>
-                    <div class="col-2">
-                        <a ng-click="goats.editGoat(goat)" class="button light">Edit</a>
-                    </div>
-                </li>
-            </ul>            
-        </section>
-        <section class="layer" ng-if="goats.editingGoat">
-            <div class="row-2 bg-light text-center text-middle">
-                <h1>Editing the <strong>{{goats.goat.name}}</strong></h1>
-            </div>
-            <div class="container row-10 pad-large gutter">
-                <div class="col-3">
-                    <img ng-if="goats.goat.image.length > 5" ng-src="{{goats.goat.image}}" width="100%">
-                </div>
-                <div class="col-9">
-                    <div class="field"><label>Alternate Name:</label><input type="text" ng-model="goats.goat.alt"></div>
-                    <div class="field"><label>Origin:</label><input type="text" ng-model="goats.goat.origin"></div>
-                    <div class="field"><label>Purpose:</label><input type="text" ng-model="goats.goat.purpose"></div>
-                    <div class="field buttons-right">
-                        <button ng-click="goats.saveGoat()" class="primary">Save</button>
-                        <button ng-click="goats.cancelGoat()" class="light">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="row-12 activate-all-fade">
+        <section ui-view class="layer"></section>
     </main>
 </body>
 <script src="src/assets/lodash.min.js"></script>

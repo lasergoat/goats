@@ -13,4 +13,8 @@ angular.module('Goats')
     self.getGoats = function() {
         return $http.get('/goats');
     };
+
+    self.getGoat = function(name) {
+        return $http.get('/goat/' + name);
+    };
 }]);
