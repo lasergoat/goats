@@ -1,5 +1,8 @@
-angular.module('Goats')
-.controller('GoatsController', ['$state', 'GoatsService', 'goats', 'goat', function($state, GoatsService, goats, goat) {
+
+angular.module('goatsApp.goatsCtrl', [])
+
+.controller('goatsCtrl', ['$state', 'goatsService', 'goats', 'goat', function($state, goatsService, goats, goat) {
+
     var self = this;
 
     self.goat = goat.data;
@@ -9,7 +12,7 @@ angular.module('Goats')
     self.goats = goats.data;
 
     self.saveGoat = function() {
-        GoatsService.saveGoat(self.goat)
+        goatsService.saveGoat(self.goat)
             .then(function() {
                 $state.go('goats');
             })

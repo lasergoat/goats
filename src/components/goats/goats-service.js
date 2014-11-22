@@ -1,5 +1,7 @@
-angular.module('Goats')
-.service('GoatsService', ['$http', function($http) {
+
+angular.module('goatsApp.goatsService', [])
+
+.service('goatsService', ['$http', function($http) {
     var self = this;
 
     self.saveGoat = function(goat) {
