@@ -16,12 +16,14 @@ module.exports = function(config) {
 	files: [
 		// these files must be loaded first
 		'src/assets/angular.min.js',
+		'src/assets/angular-animate.min.js',
 		'src/assets/angular-mocks.js',
 		'src/assets/angular-ui-router.min.js',
 		'src/assets/lodash.min.js',
-		'src/components/goats/goats.js',
+		'src/components/goats/goats-routes.js',
 		'src/components/goats/goats-controller.js',
 		'src/components/goats/goats-service.js',
+		'src/components/goats/goats.js',
 		'src/app.js',
 		'test/**/*.js',
 		'src/**/*.html'
