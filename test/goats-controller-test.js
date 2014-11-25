@@ -65,9 +65,11 @@ describe("Goats: goatsCtrl", function () {
             return _$controller_(
                 'goatsCtrl', 
                 {
-                    '$state'                : $state,
-                    'goat'                  : {},
-                    'goats'                 : goats,
+                    '$state' : $state,
+                    'goat'   : {
+                        data:{}
+                    },
+                    'goats'  : goats,
                 }
             );
         };
@@ -76,9 +78,11 @@ describe("Goats: goatsCtrl", function () {
             return _$controller_(
                 'goatsCtrl', 
                 {
-                    '$state'                : $state,
-                    'goat'                  : goat,
-                    'goats'                 : [],
+                    '$state' : $state,
+                    'goat'   : {
+                        data:goat
+                    },
+                    'goats'  : [],
                 }
             );
         };
@@ -87,9 +91,11 @@ describe("Goats: goatsCtrl", function () {
             return _$controller_(
                 'goatsCtrl', 
                 {
-                    '$state'                : $state,
-                    'goat'                  : {},
-                    'goats'                 : goats,
+                    '$state' : $state,
+                    'goat'   : {
+                        data:{}
+                    },
+                    'goats'  : goats,
                 }
             );
         };
@@ -99,7 +105,17 @@ describe("Goats: goatsCtrl", function () {
 
         var controller = goatEditController();
 
-        expect($scope.goat).toEqual(goat);
+        expect(controller.goat).toEqual(goat);
+
+    });
+
+    it('should initialize self.goatQuery with the stateParam passed in', function() {
+
+        _$state_.params.goatQuery = 'TEST';
+
+        var controller = goatEditController();
+
+        expect(controller.goatQuery).toEqual('TEST');
 
     });
 
