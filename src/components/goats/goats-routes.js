@@ -44,4 +44,4 @@ angular.module('goatsApp.goatsRoutes', [])
             controller: 'goatsCtrl',
             controllerAs: 'goats'
         });
-}])
+}]);
