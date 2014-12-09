@@ -111,11 +111,42 @@ describe("Goats: goatsCtrl", function () {
 
     it('should initialize self.goatQuery with the stateParam passed in', function() {
 
-        _$state_.params.goatQuery = 'TEST';
+        $state.params.query = 'TEST';
 
         var controller = goatEditController();
 
         expect(controller.goatQuery).toEqual('TEST');
+
+    });
+
+    it('should initialize self.goats with the resolved data passed in', function() {
+
+        var controller = goatEditController();
+
+        expect(controller.goats).toEqual(goats.data);
+
+    });
+
+    it('should save a goat when edited', function() {
+
+        var controller = goatEditController();
+
+        var saveGoatDefer = $q.defer();
+
+        saveGoatDefer.resolve();
+
+        goatsService.saveGoat = jasmine.createSpy('saveGoat').andReturn(saveGoatDefer.promise);
+
+        spyOn($state, 'go').andCallFake(function(state, params) {});
+
+        var result = controller.saveGoat();
+
+        // if digest isn't here, angular can't process the changes
+        // and karma won't think state.go got called
+        $scope.$digest();
+
+        expect($state.go).toHaveBeenCalledWith('goats');
+        expect(goatsService.saveGoat).toHaveBeenCalledWith(controller.goat);
 
     });
 

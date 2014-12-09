@@ -5,7 +5,7 @@ angular.module('goatsApp.goatsService', [])
     var self = this;
 
     self.saveGoat = function(goat) {
-        return $http.post('/goats', goat);
+        return $http.put('/goats', goat);
     };
 
     self.searchGoats = function(query) {

@@ -935,7 +935,7 @@ app.get('/goats', function(req, res) {
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json()
 
-app.post('/goats', jsonParser, function(req, res) {
+app.put('/goats', jsonParser, function(req, res) {
 
     data = req.body;
 

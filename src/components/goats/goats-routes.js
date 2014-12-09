@@ -3,6 +3,8 @@ angular.module('goatsApp.goatsRoutes', [])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.otherwise('/goats');
+
     $stateProvider
         .state('goats', {
             url: '/goats',
