@@ -20,11 +20,8 @@ module.exports = function(config) {
 		'src/assets/angular-animate.min.js',
 		'src/assets/angular-ui-router.min.js',
 		'src/assets/lodash.min.js',
-		'src/components/goats/goats-routes.js',
-		'src/components/goats/goats-controller.js',
-		'src/components/goats/goats-service.js',
-		'src/components/goats/goats.js',
 		'src/app.js',
+		'src/**/*.js',
 		'test/**/*.js',
 		'src/**/*.html'
 	],

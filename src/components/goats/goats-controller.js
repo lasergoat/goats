@@ -11,7 +11,7 @@ angular.module('goatsApp.goatsCtrl', [])
 
     self.goats = goats.data;
 
-    self.saveGoat = function() {
+    self.saveTheGoat = function() {
         goatsService.saveGoat(self.goat)
             .then(function() {
                 $state.go('goats');
